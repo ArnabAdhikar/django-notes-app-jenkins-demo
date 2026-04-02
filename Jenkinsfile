@@ -1,8 +1,5 @@
 pipeline{
     agent { label "bro" }
-    environment {
-        DOCKER_BUILDKIT = 1
-    }
     stages{
         stage("code"){
             steps{

@@ -107,7 +107,7 @@ The backend provides the following REST API endpoints:
 
 ## 🏗️ CI/CD with Jenkins
 
-The [Jenkinsfile](file:///home/arnab-adhikary/Downloads/django-notes-app-jenkins-demo/Jenkinsfile) defines a pipeline that utilizes **Docker BuildKit** (`DOCKER_BUILDKIT=1`) for faster and more efficient image builds. It consists of the following stages:
+The [Jenkinsfile](file:///home/arnab-adhikary/Downloads/django-notes-app-jenkins-demo/Jenkinsfile) defines a pipeline with the following stages:
 
 1.  **Code Clone**: Pulls the latest code from GitHub.
 2.  **Code Build**: Builds the Docker images for the application.
