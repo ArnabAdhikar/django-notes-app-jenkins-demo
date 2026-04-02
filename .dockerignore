@@ -1,0 +1,16 @@
+# Build context exclusion
+.git
+.gitignore
+.dockerignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.db.sqlite3
+db.sqlite3
+.env
+mynotes/node_modules/
+mynotes/build/
+
+# Database data files (causes permission errors during build)
+data/

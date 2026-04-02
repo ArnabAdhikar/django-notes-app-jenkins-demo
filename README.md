@@ -33,7 +33,8 @@ django-notes-app-jenkins-demo/
 ├── Dockerfile          # Backend containerization
 ├── Jenkinsfile         # CI/CD Pipeline definition
 ├── manage.py           # Django management script
-└── requirements.txt    # Python dependencies
+├── requirements.txt    # Python dependencies
+└── .dockerignore       # Files to exclude from Docker build context
 ```
 
 ## 🛠️ Technologies Used
@@ -89,6 +90,10 @@ docker-compose up --build
 - **Backend API**: `http://localhost:8000/api/`
 - **Django Admin**: `http://localhost:8000/admin/`
 
+### 🐋 Docker Optimization
+
+The project includes a `.dockerignore` file to ensure that unnecessary files (like `__pycache__`, `node_modules`, and the database `data/` directory) are excluded from the Docker build context. This results in smaller image sizes, faster builds, and avoids permission errors when the database is running.
+
 ## 📡 API Endpoints
 
 The backend provides the following REST API endpoints:
@@ -102,7 +107,7 @@ The backend provides the following REST API endpoints:
 
 ## 🏗️ CI/CD with Jenkins
 
-The [Jenkinsfile](file:///home/arnab-adhikary/Downloads/django-notes-app-jenkins-demo/Jenkinsfile) defines a pipeline with the following stages:
+The [Jenkinsfile](file:///home/arnab-adhikary/Downloads/django-notes-app-jenkins-demo/Jenkinsfile) defines a pipeline that utilizes **Docker BuildKit** (`DOCKER_BUILDKIT=1`) for faster and more efficient image builds. It consists of the following stages:
 
 1.  **Code Clone**: Pulls the latest code from GitHub.
 2.  **Code Build**: Builds the Docker images for the application.
