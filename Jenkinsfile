@@ -1,30 +1,33 @@
+@Library("Shared") _
 pipeline{
     agent { label "bro" }
     stages{
+        stage("hello"){
+            steps{
+                script{
+                    hello()
+                }
+            }
+        }
         stage("code"){
             steps{
-                echo "clonning"
-                git url: "https://github.com/ArnabAdhikar/django-notes-app-jenkins-demo.git", branch:"main"
-                echo "successful"
+                script{
+                    clone("https://github.com/ArnabAdhikar/django-notes-app-jenkins-demo.git","main")
+                }
             }
         }
         stage("build"){
             steps{
-                echo "building"
-                sh "docker build -t notes-app:latest ."
+                script{
+                    docker_build("notes-app","latest","arnaba075")
+                }
             }
         }
         stage("push to dockerhub"){
             steps{
                 echo "pushing"
-                withCredentials([usernamePassword(
-                    credentialsId:"DockerHubCreds",
-                    usernameVariable:"DockerHubUser", 
-                    passwordVariable:"DockerHubPass")]){
-                sh 'docker login -u ${env.DockerHubUser} -p ${env.DockerHubPass}'
-                sh "docker image tag notes-app:latest ${env.DockerHubUser}/notes-app:latest"
-                sh "docker push ${env.DockerHubUser}/notes-app:latest"
-                echo "Done..."
+                script{
+                    docker_push("notes-app","latest","arnaba075")
                 }
             }
         }
